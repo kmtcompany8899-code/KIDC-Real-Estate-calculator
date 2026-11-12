@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information authenticated via Google/Gmail",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 512 },
+        "createdAt": { "type": "string" },
+        "lastLoginAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "SavedCalculation": {
+      "title": "SavedCalculation",
+      "description": "Saved mortgage calculation and quotation records for real estate clients",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userEmail": { "type": "string", "maxLength": 256 },
+        "customerName": { "type": "string", "maxLength": 128 },
+        "projectName": { "type": "string", "maxLength": 128 },
+        "agentPhone": { "type": "string", "maxLength": 64 },
+        "currency": { "type": "string", "enum": ["LAK", "THB", "USD"] },
+        "propertyPrice": { "type": "number" },
+        "downMode": { "type": "string", "enum": ["percent", "amount"] },
+        "downPercent": { "type": "number" },
+        "downAmount": { "type": "number" },
+        "principal": { "type": "number" },
+        "annualRate": { "type": "number" },
+        "termUnit": { "type": "string", "enum": ["years", "months"] },
+        "termValue": { "type": "number" },
+        "totalMonths": { "type": "number" },
+        "method": { "type": "string", "enum": ["reducing", "flat"] },
+        "monthlyPayment": { "type": "number" },
+        "totalInterest": { "type": "number" },
+        "totalPayment": { "type": "number" },
+        "status": { "type": "string", "enum": ["draft", "presented", "negotiation", "approved", "completed"] },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "customerName", "projectName", "currency", "propertyPrice", "monthlyPayment"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile store, accessible only by the respective authenticated owner"
+    },
+    "/calculations/{calcId}": {
+      "schema": "SavedCalculation",
+      "description": "Mortgage calculation quotations owned by the authenticated agent/user"
+    }
+  }
+}

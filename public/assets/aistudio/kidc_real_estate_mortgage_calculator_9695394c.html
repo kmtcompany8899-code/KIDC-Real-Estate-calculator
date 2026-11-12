@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KIDC Real Estate | ລະບົບຄິດໄລ່ຄ່າຜ່ອນຊຳລະອະສັງຫາລິມະຊັບ</title>
+
+  <!-- Google Fonts: Noto Sans Lao & Inter for crisp Lao typography and tabular numbers -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Lao:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans Lao"', 'Inter', 'sans-serif'],
+            num: ['Inter', '"Noto Sans Lao"', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#172554',
+            },
+            gold: {
+              300: '#fde68a',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d4af37',
+              700: '#b45309',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Base Typography & Tabular Numerals */
+    body {
+      font-family: 'Noto Sans Lao', 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+      font-family: 'Inter', 'Noto Sans Lao', sans-serif;
+    }
+
+    /* Luxury Custom Range Sliders */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 9999px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #0f172a;
+      border: 3px solid #d4af37;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.35);
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover,
+    input[type="range"]::-webkit-slider-thumb:active {
+      transform: scale(1.15);
+      background: #d4af37;
+      border-color: #0f172a;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #0f172a;
+      border: 3px solid #d4af37;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.35);
+      cursor: pointer;
+    }
+
+    /* SVG Donut Ring Transition */
+    .donut-segment {
+      transition: stroke-dasharray 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                  stroke-dashoffset 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                  stroke-width 0.2s ease;
+    }
+
+    /* Hide scrollbars on horizontal chip rows while keeping scrollability */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Official A4 Print Stylesheet */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 14mm;
+      }
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 11pt;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-only-sheet {
+        display: block !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      #view-calculator,
+      #view-compare,
+      #quotation-form-card {
+        display: none !important;
+      }
+      #view-quotation {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased">
+
+  <!-- Toast Notification Banner -->
+  <div id="toast" role="status" aria-live="polite"
+       class="fixed top-4 right-4 left-4 sm:left-auto sm:min-w-[300px] z-50 bg-navy-900 text-white px-4 py-3.5 rounded-2xl shadow-2xl border border-gold-600/50 flex items-center space-x-3 transform transition-all duration-300 -translate-y-28 opacity-0 pointer-events-none no-print">
+    <div class="w-8 h-8 rounded-full bg-gold-600/20 text-gold-400 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
+    <span id="toastText" class="text-sm font-medium leading-snug">ຄັດລອກຂໍ້ມູນສຳເລັດແລ້ວ!</span>
+  </div>
+
+  <!-- Sticky Executive Header -->
+  <header class="sticky top-0 z-40 bg-gradient-to-r from-navy-900 via-navy-950 to-navy-800 text-white shadow-lg border-b border-gold-600/30 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Top Brand & Currency Row -->
+      <div class="flex items-center justify-between py-3 sm:py-4 gap-3">
+        <!-- Brand Identity -->
+        <div class="flex items-center space-x-3 min-w-0">
+          <!-- Luxury Monogram Emblem -->
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-gold-400 via-gold-600 to-gold-700 p-[1.5px] shadow-md shrink-0">
+            <div class="w-full h-full rounded-[14px] bg-navy-900 flex flex-col items-center justify-center">
+              <span class="text-gold-400 font-extrabold text-base sm:text-lg tracking-tighter leading-none tabular-nums">KIDC</span>
+              <span class="text-[8px] text-gold-300 tracking-widest uppercase mt-0.5">ESTATE</span>
+            </div>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center space-x-2">
+              <h1 class="text-base sm:text-xl font-extrabold tracking-wide text-white truncate">
+                KIDC <span class="text-gold-400">REAL ESTATE</span>
+              </h1>
+            </div>
+            <p class="text-[11px] sm:text-xs text-slate-300 truncate">
+              ລະບົບຄິດໄລ່ຄ່າຜ່ອນຊຳລະອະສັງຫາລິມະຊັບ
+            </p>
+          </div>
+        </div>
+
+        <!-- Multi-Currency Switcher -->
+        <div class="flex items-center bg-navy-900/90 p-1 rounded-xl border border-white/15 shadow-inner shrink-0" role="group" aria-label="ເລືອກສະກຸນເງິນ">
+          <button type="button" id="curr-btn-LAK" onclick="setCurrency('LAK')"
+                  class="px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-gradient-to-r from-gold-500 to-gold-600 text-navy-900 shadow">
+            ₭ ກີບ
+          </button>
+          <button type="button" id="curr-btn-THB" onclick="setCurrency('THB')"
+                  class="px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all">
+            ฿ ບາດ
+          </button>
+          <button type="button" id="curr-btn-USD" onclick="setCurrency('USD')"
+                  class="px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all">
+            $ ໂດລາ
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex space-x-1 sm:space-x-2 pb-2.5 overflow-x-auto no-scrollbar" aria-label="ເມນູຫຼັກ">
+        <button type="button" id="nav-tab-calculator" onclick="switchTab('calculator')"
+                class="flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-navy-900 shadow-sm whitespace-nowrap">
+          <svg class="w-4 h-4 text-gold-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/>
+          </svg>
+          <span>ຄິດໄລ່ຄ່າຜ່ອນ</span>
+        </button>
+
+        <button type="button" id="nav-tab-compare" onclick="switchTab('compare')"
+                class="flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap">
+          <svg class="w-4 h-4 text-gold-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
+          </svg>
+          <span>ປຽບທຽບແຜນຜ່ອນ</span>
+        </button>
+
+        <button type="button" id="nav-tab-quotation" onclick="switchTab('quotation')"
+                class="flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap">
+          <svg class="w-4 h-4 text-gold-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <span>ໃບສະເໜີລາຄາ</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- ===================================================================== -->
+    <!-- TAB 1: MAIN CALCULATOR & RESULTS DASHBOARD ("ຄິດໄລ່ຄ່າຜ່ອນ")          -->
+    <!-- ===================================================================== -->
+    <section id="view-calculator" class="space-y-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+
+        <!-- LEFT: Interactive Calculator Form (7 Columns) -->
+        <div class="lg:col-span-7 bg-white rounded-3xl shadow-sm border border-slate-200/90 p-5 sm:p-7 space-y-6">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div>
+              <h2 class="text-lg sm:text-xl font-bold text-navy-900">ປ້ອນຂໍ້ມູນການຄິດໄລ່</h2>
+              <p class="text-xs text-slate-500 mt-0.5">ປັບປ່ຽນຕົວເລກ ຫຼື ເລື່ອນແຖບເພື່ອເບິ່ງຄ່າງວດທັນທີ</p>
+            </div>
+            <button type="button" onclick="resetCalculator()"
+                    class="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-navy-900 bg-slate-100 hover:bg-slate-200 transition flex items-center space-x-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              <span>ຄ່າເລີ່ມຕົ້ນ</span>
+            </button>
+          </div>
+
+          <!-- 1. Property Price (ມູນຄ່າຊັບສິນ / ລາຄາທີ່ດິນ-ເຮືອນ) -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <label for="input-price" class="text-sm font-bold text-navy-900">
+                1. ມູນຄ່າຊັບສິນ / ລາຄາທີ່ດິນ-ເຮືອນ
+              </label>
+              <span id="badge-currency-code" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-50 text-gold-700 border border-gold-500/30">
+                LAK (ກີບ)
+              </span>
+            </div>
+
+            <div class="relative">
+              <span id="symbol-price-prefix" class="absolute inset-y-0 left-0 pl-4 flex items-center text-lg font-extrabold text-gold-600 pointer-events-none tabular-nums">
+                ₭
+              </span>
+              <input type="text" id="input-price" inputmode="numeric"
+                     oninput="onPriceTextInput(this.value)"
+                     onblur="formatPriceField()"
+                     class="w-full pl-10 pr-4 py-3.5 rounded-2xl border-2 border-slate-200 focus:border-gold-600 focus:ring-0 text-xl sm:text-2xl font-extrabold text-navy-900 tabular-nums transition bg-slate-50/50 focus:bg-white"
+                     value="350,000,000">
+            </div>
+
+            <input type="range" id="slider-price" min="50000000" max="5000000000" step="10000000" value="350000000"
+                   oninput="onPriceSliderInput(this.value)">
+
+            <!-- Dynamic Currency Price Presets -->
+            <div id="price-presets-container" class="flex flex-wrap gap-2 pt-1">
+              <!-- Rendered dynamically per currency -->
+            </div>
+          </div>
+
+          <!-- 2. Down Payment (ເງິນຈ່າຍກ່ອນ / ເງິນດາວ) -->
+          <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3.5">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <label class="text-sm font-bold text-navy-900">
+                2. ເງິນຈ່າຍກ່ອນ / ເງິນດາວ
+              </label>
+
+              <!-- Mode Switcher: % vs Exact Amount -->
+              <div class="inline-flex rounded-xl bg-slate-200/80 p-1 text-xs font-bold">
+                <button type="button" id="down-mode-percent" onclick="setDownPaymentMode('percent')"
+                        class="px-3 py-1.5 rounded-lg bg-navy-900 text-white shadow-sm transition">
+                  ເປີເຊັນ (%)
+                </button>
+                <button type="button" id="down-mode-amount" onclick="setDownPaymentMode('amount')"
+                        class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-navy-900 transition">
+                  ຈຳນວນເງິນ
+                </button>
+              </div>
+            </div>
+
+            <!-- Input + Live Summary Pill -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
+              <!-- Percent Input Box -->
+              <div id="down-percent-wrapper" class="relative">
+                <input type="number" id="input-down-percent" min="0" max="95" step="1" value="20"
+                       oninput="onDownPercentInput(this.value)"
+                       class="w-full pl-4 pr-10 py-3 rounded-xl border-2 border-slate-200 focus:border-gold-600 focus:outline-none text-lg font-extrabold text-navy-900 tabular-nums bg-white">
+                <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-sm font-bold text-slate-400 pointer-events-none">%</span>
+              </div>
+
+              <!-- Exact Amount Input Box -->
+              <div id="down-amount-wrapper" class="relative hidden">
+                <span id="symbol-down-prefix" class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-base font-bold text-gold-600 pointer-events-none">₭</span>
+                <input type="text" id="input-down-amount" inputmode="numeric" value="70,000,000"
+                       oninput="onDownAmountInput(this.value)"
+                       onblur="formatDownAmountField()"
+                       class="w-full pl-9 pr-4 py-3 rounded-xl border-2 border-slate-200 focus:border-gold-600 focus:outline-none text-lg font-extrabold text-navy-900 tabular-nums bg-white">
+              </div>
+
+              <!-- Calculated Down Payment & Remaining Principal Readout -->
+              <div class="bg-white rounded-xl px-3.5 py-2.5 border border-slate-200 flex flex-col justify-center">
+                <div class="flex justify-between text-xs">
+                  <span class="text-slate-500">ເງິນດາວ (<span id="readout-down-pct" class="font-bold text-gold-700 tabular-nums">20%</span>):</span>
+                  <span id="readout-down-amt" class="font-bold text-navy-900 tabular-nums">70,000,000 ₭</span>
+                </div>
+                <div class="flex justify-between text-xs mt-1 pt-1 border-t border-slate-100">
+                  <span class="text-slate-500">ຍອດຄ້າງຜ່ອນ:</span>
+                  <span id="readout-loan-principal" class="font-extrabold text-navy-950 tabular-nums">280,000,000 ₭</span>
+                </div>
+              </div>
+            </div>
+
+            <input type="range" id="slider-down" min="0" max="90" step="1" value="20"
+                   oninput="onDownPercentInput(this.value)">
+
+            <!-- Quick Down Payment % Chips -->
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="onDownPercentInput(0)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 hover:border-gold-600 text-slate-700 transition tabular-nums">0%</button>
+              <button type="button" onclick="onDownPercentInput(10)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 hover:border-gold-600 text-slate-700 transition tabular-nums">10%</button>
+              <button type="button" onclick="onDownPercentInput(20)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 hover:border-gold-600 text-slate-700 transition tabular-nums">20%</button>
+              <button type="button" onclick="onDownPercentInput(30)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 hover:border-gold-600 text-slate-700 transition tabular-nums">30%</button>
+              <button type="button" onclick="onDownPercentInput(50)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-200 hover:border-gold-600 text-slate-700 transition tabular-nums">50%</button>
+            </div>
+          </div>
+
+          <!-- 3. Annual Interest Rate (ອັດຕາດອກເບ້ຍຕໍ່ປີ %) -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <label for="input-rate" class="text-sm font-bold text-navy-900">
+                3. ອັດຕາດອກເບ້ຍຕໍ່ປີ (%)
+              </label>
+              <span id="badge-rate-type" class="text-xs font-semibold text-slate-500">
+                0% = ບໍ່ມີດອກເບ້ຍ
+              </span>
+            </div>
+
+            <div class="relative">
+              <input type="number" id="input-rate" min="0" max="30" step="0.1" value="8.5"
+                     oninput="onRateInput(this.value)"
+                     class="w-full pl-4 pr-16 py-3 rounded-2xl border-2 border-slate-200 focus:border-gold-600 focus:outline-none text-lg font-extrabold text-navy-900 tabular-nums bg-slate-50/50 focus:bg-white">
+              <span class="absolute inset-y-0 right-0 pr-4 flex items-center text-xs font-bold text-slate-500 pointer-events-none">% / ປີ</span>
+            </div>
+
+            <input type="range" id="slider-rate" min="0" max="20" step="0.1" value="8.5"
+                   oninput="onRateInput(this.value)">
+
+            <!-- Quick Interest Presets -->
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="onRateInput(0)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-50 border border-gold-500/40 hover:bg-amber-100 text-gold-700 transition">
+                0% ຜ່ອນກັບໂຄງການ
+              </button>
+              <button type="button" onclick="onRateInput(6.5)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition tabular-nums">6.5%</button>
+              <button type="button" onclick="onRateInput(8.5)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition tabular-nums">8.5%</button>
+              <button type="button" onclick="onRateInput(10)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition tabular-nums">10%</button>
+              <button type="button" onclick="onRateInput(12)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition tabular-nums">12%</button>
+            </div>
+          </div>
+
+          <!-- 4. Loan Term (ໄລຍະເວລາຜ່ອນຊຳລະ) -->
+          <div class="space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <label for="input-term" class="text-sm font-bold text-navy-900">
+                4. ໄລຍະເວລາຜ່ອນຊຳລະ
+              </label>
+
+              <!-- Unit Toggle: Years vs Months -->
+              <div class="inline-flex rounded-xl bg-slate-100 p-1 text-xs font-bold border border-slate-200">
+                <button type="button" id="term-unit-years" onclick="setTermUnit('years')"
+                        class="px-3 py-1.5 rounded-lg bg-navy-900 text-white shadow-sm transition">
+                  ປີ (Years)
+                </button>
+                <button type="button" id="term-unit-months" onclick="setTermUnit('months')"
+                        class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-navy-900 transition">
+                  ເດືອນ (Months)
+                </button>
+              </div>
+            </div>
+
+            <div class="relative">
+              <input type="number" id="input-term" min="1" max="25" step="1" value="10"
+                     oninput="onTermInput(this.value)"
+                     class="w-full pl-4 pr-28 py-3 rounded-2xl border-2 border-slate-200 focus:border-gold-600 focus:outline-none text-lg font-extrabold text-navy-900 tabular-nums bg-slate-50/50 focus:bg-white">
+              <span id="term-equivalent-badge" class="absolute inset-y-0 right-0 pr-4 flex items-center text-xs font-bold text-gold-700 pointer-events-none tabular-nums">
+                10 ປີ (120 ງວດ)
+              </span>
+            </div>
+
+            <input type="range" id="slider-term" min="1" max="25" step="1" value="10"
+                   oninput="onTermInput(this.value)">
+
+            <!-- Quick Term Chips -->
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="applyQuickTerm(12, 'months')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">12 ເດືອນ</button>
+              <button type="button" onclick="applyQuickTerm(24, 'months')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">24 ເດືອນ</button>
+              <button type="button" onclick="applyQuickTerm(36, 'months')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">36 ເດືອນ</button>
+              <button type="button" onclick="applyQuickTerm(60, 'months')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">60 ເດືອນ</button>
+              <button type="button" onclick="applyQuickTerm(10, 'years')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">10 ປີ</button>
+              <button type="button" onclick="applyQuickTerm(15, 'years')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">15 ປີ</button>
+            </div>
+          </div>
+
+          <!-- 5. Calculation Method (ຮູບແບບການຄິດໄລ່) -->
+          <div class="space-y-2.5 pt-1">
+            <label class="block text-sm font-bold text-navy-900">
+              5. ຮູບແບບການຄິດໄລ່ດອກເບ້ຍ
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button type="button" id="method-btn-reducing" onclick="setCalculationMethod('reducing')"
+                      class="p-3.5 rounded-2xl border-2 border-gold-600 bg-amber-50/70 text-left transition">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-extrabold text-navy-900">ຫຼຸດຕົ້ນຫຼຸດດອກ</span>
+                  <span class="w-4 h-4 rounded-full bg-gold-600 flex items-center justify-center">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                  </span>
+                </div>
+                <p class="text-[11px] text-slate-600 mt-1">Reducing Balance (ມາດຕະຖານທະນາຄານ)</p>
+              </button>
+
+              <button type="button" id="method-btn-flat" onclick="setCalculationMethod('flat')"
+                      class="p-3.5 rounded-2xl border-2 border-slate-200 bg-white hover:border-slate-300 text-left transition">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-extrabold text-navy-900">ດອກເບ້ຍຄົງທີ່</span>
+                  <span class="w-4 h-4 rounded-full border-2 border-slate-300"></span>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-1">Flat Rate (ຜ່ອນກັບໂຄງການ / ຄົງທີ່)</p>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Real-Time Results Dashboard & Pure SVG Donut Chart (5 Columns) -->
+        <div class="lg:col-span-5 space-y-6">
+
+          <!-- Hero Navy & Gold Monthly Installment Card -->
+          <div class="rounded-3xl bg-gradient-to-br from-navy-900 via-navy-950 to-navy-800 text-white p-6 sm:p-7 shadow-xl border border-gold-600/40 relative overflow-hidden">
+            <!-- Subtle decorative radial gold accents -->
+            <div class="absolute -right-12 -top-12 w-44 h-44 rounded-full bg-gold-500/15 blur-2xl pointer-events-none"></div>
+            <div class="absolute -left-12 -bottom-12 w-36 h-36 rounded-full bg-blue-400/10 blur-2xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-gold-300">
+                  ຍອດຜ່ອນຊຳລະຕໍ່ເດືອນ
+                </span>
+                <span id="hero-method-pill" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-gold-500/20 text-gold-300 border border-gold-400/30">
+                  ຫຼຸດຕົ້ນຫຼຸດດອກ
+                </span>
+              </div>
+
+              <!-- Big Monthly Payment Number -->
+              <div class="my-3 flex flex-wrap items-baseline gap-x-2">
+                <span id="hero-monthly-payment" class="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-white tracking-tight tabular-nums leading-tight">
+                  3,471,600
+                </span>
+                <span id="hero-monthly-unit" class="text-base sm:text-lg font-bold text-gold-400">
+                  ₭ / ເດືອນ
+                </span>
+              </div>
+
+              <p id="hero-subtitle-meta" class="text-xs text-slate-300 mb-6">
+                ໄລຍະຜ່ອນ 120 ງວດ (10 ປີ) • ດອກເບ້ຍ 8.5% ຕໍ່ປີ
+              </p>
+
+              <!-- 3 Metric Sub-Cards -->
+              <div class="space-y-2.5 pt-4 border-t border-white/10">
+                <div class="flex items-center justify-between bg-white/5 rounded-2xl px-4 py-3 border border-white/10">
+                  <span class="text-xs text-slate-300">ຍອດຈັດສິນເຊື່ອ / ຍອດຄ້າງຜ່ອນ</span>
+                  <span id="metric-principal" class="text-sm sm:text-base font-extrabold text-white tabular-nums">280,000,000 ₭</span>
+                </div>
+
+                <div class="flex items-center justify-between bg-white/5 rounded-2xl px-4 py-3 border border-white/10">
+                  <span class="text-xs text-gold-300">ດອກເບ້ຍລວມທັງໝົດ</span>
+                  <span id="metric-interest" class="text-sm sm:text-base font-extrabold text-gold-400 tabular-nums">136,592,000 ₭</span>
+                </div>
+
+                <div class="flex items-center justify-between bg-gradient-to-r from-gold-600/25 to-gold-500/15 rounded-2xl px-4 py-3 border border-gold-500/30">
+                  <span class="text-xs font-bold text-white">ຍອດຊຳລະລວມທັງໝົດ</span>
+                  <span id="metric-total" class="text-base sm:text-lg font-extrabold text-gold-300 tabular-nums">416,592,000 ₭</span>
+                </div>
+              </div>
+
+              <!-- Quick Action Buttons -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-5">
+                <button type="button" onclick="copyWhatsAppSummary()"
+                        class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-navy-900 font-extrabold text-xs sm:text-sm shadow-lg flex items-center justify-center space-x-2 transition">
+                  <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                  </svg>
+                  <span>ຄັດລອກສົ່ງ WhatsApp</span>
+                </button>
+
+                <button type="button" onclick="switchTab('quotation')"
+                        class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm border border-white/15 flex items-center justify-center space-x-2 transition">
+                  <svg class="w-4 h-4 text-gold-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                  </svg>
+                  <span>ອອກໃບສະເໜີລາຄາ</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pure SVG Interactive Donut Chart Card -->
+          <div class="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-sm font-bold text-navy-900">ອັດຕາສ່ວນເງິນຕົ້ນ ແລະ ດອກເບ້ຍ</h3>
+              <span id="svg-chart-hover-label" class="text-xs font-semibold text-gold-700 bg-amber-50 px-2.5 py-0.5 rounded-full">
+                ແຕະເພື່ອເບິ່ງລາຍລະອຽດ
+              </span>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <!-- Pure SVG Donut -->
+              <div class="relative w-44 h-44 shrink-0">
+                <svg viewBox="0 0 120 120" class="w-full h-full -rotate-90 overflow-visible" aria-label="ແຜນວາດອັດຕາສ່ວນເງິນຕົ້ນ ແລະ ດອກເບ້ຍ">
+                  <!-- Background Track -->
+                  <circle cx="60" cy="60" r="46" fill="transparent" stroke="#f1f5f9" stroke-width="16"></circle>
+                  <!-- Interest Segment (Gold) -->
+                  <circle id="svg-ring-interest" cx="60" cy="60" r="46" fill="transparent"
+                          stroke="#d4af37" stroke-width="16" stroke-dasharray="289.03 289.03" stroke-dashoffset="0"
+                          class="donut-segment cursor-pointer"
+                          onmouseenter="highlightChartSegment('interest')"
+                          onclick="highlightChartSegment('interest')"></circle>
+                  <!-- Principal Segment (Deep Navy) -->
+                  <circle id="svg-ring-principal" cx="60" cy="60" r="46" fill="transparent"
+                          stroke="#0f172a" stroke-width="16" stroke-dasharray="194 289.03" stroke-dashoffset="0"
+                          class="donut-segment cursor-pointer"
+                          onmouseenter="highlightChartSegment('principal')"
+                          onclick="highlightChartSegment('principal')"></circle>
+                </svg>
+
+                <!-- Center Text -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-3">
+                  <span id="svg-center-title" class="text-[10px] font-semibold text-slate-400">ເງິນຕົ້ນ</span>
+                  <span id="svg-center-pct" class="text-xl font-extrabold text-navy-900 tabular-nums leading-tight">67.2%</span>
+                </div>
+              </div>
+
+              <!-- Legend & Breakdown -->
+              <div class="w-full space-y-3">
+                <div onclick="highlightChartSegment('principal')" class="p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 border border-slate-200/80 cursor-pointer transition">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                      <span class="w-3 h-3 rounded-full bg-navy-900"></span>
+                      <span class="text-xs font-bold text-slate-700">ເງິນຕົ້ນ (Principal)</span>
+                    </div>
+                    <span id="legend-principal-pct" class="text-xs font-extrabold text-navy-900 tabular-nums">67.2%</span>
+                  </div>
+                  <div id="legend-principal-amt" class="text-xs font-bold text-slate-500 mt-1 pl-5 tabular-nums">280,000,000 ₭</div>
+                </div>
+
+                <div onclick="highlightChartSegment('interest')" class="p-3 rounded-2xl bg-amber-50/60 hover:bg-amber-50 border border-gold-500/30 cursor-pointer transition">
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                      <span class="w-3 h-3 rounded-full bg-gold-600"></span>
+                      <span class="text-xs font-bold text-slate-700">ດອກເບ້ຍ (Interest)</span>
+                    </div>
+                    <span id="legend-interest-pct" class="text-xs font-extrabold text-gold-700 tabular-nums">32.8%</span>
+                  </div>
+                  <div id="legend-interest-amt" class="text-xs font-bold text-gold-700 mt-1 pl-5 tabular-nums">136,592,000 ₭</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- AMORTIZATION SCHEDULE TABLE SECTION ("ຕາຕະລາງການຜ່ອນຊຳລະ") -->
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-5 sm:p-7">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-200">
+          <div>
+            <h3 class="text-lg sm:text-xl font-bold text-navy-900">ຕາຕະລາງການຜ່ອນຊຳລະ</h3>
+            <p class="text-xs text-slate-500 mt-0.5">ສະແດງລາຍລະອຽດການຕັດເງິນຕົ້ນ, ດອກເບ້ຍ ແລະ ຍອດຄົງເຫຼືອແຕ່ລະງວດ</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5">
+            <!-- Yearly vs Monthly Toggle -->
+            <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200 text-xs font-bold">
+              <button type="button" id="sched-view-yearly" onclick="setScheduleView('yearly')"
+                      class="px-3.5 py-2 rounded-lg bg-navy-900 text-white shadow-sm transition">
+                ສະຫຼຸບລາຍປີ
+              </button>
+              <button type="button" id="sched-view-monthly" onclick="setScheduleView('monthly')"
+                      class="px-3.5 py-2 rounded-lg text-slate-600 hover:text-navy-900 transition">
+                ລາຍເດືອນ
+              </button>
+            </div>
+
+            <!-- Export CSV Button -->
+            <button type="button" onclick="exportScheduleCSV()"
+                    class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm flex items-center space-x-2 transition">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+              <span>ດາວໂຫຼດ Excel (CSV)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Responsive Scrollable Table -->
+        <div class="mt-5 overflow-x-auto max-h-[480px] rounded-2xl border border-slate-200">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead class="bg-navy-900 text-white sticky top-0 z-10 text-[11px] sm:text-xs uppercase tracking-wider">
+              <tr>
+                <th id="th-period-label" class="py-3.5 px-4 font-bold whitespace-nowrap">ປີທີ</th>
+                <th class="py-3.5 px-4 text-right font-bold whitespace-nowrap">ຍອດຜ່ອນຕໍ່ງວດ</th>
+                <th class="py-3.5 px-4 text-right font-bold whitespace-nowrap">ຕັດເງິນຕົ້ນ</th>
+                <th class="py-3.5 px-4 text-right font-bold text-gold-300 whitespace-nowrap">ດອກເບ້ຍ</th>
+                <th class="py-3.5 px-4 text-right font-bold whitespace-nowrap">ຍອດຄົງເຫຼືອ</th>
+              </tr>
+            </thead>
+            <tbody id="schedule-tbody" class="divide-y divide-slate-100 tabular-nums">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+          <span id="schedule-footer-count">ສະແດງ 10 ປີ (120 ງວດ)</span>
+          <span>* ຕົວເລກຄຳນວນເບື້ອງຕົ້ນເພື່ອໃຊ້ປະກອບການຕັດສິນໃຈ</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 2: COMPARE INSTALLMENT PLANS ("ປຽບທຽບແຜນຜ່ອນ")                   -->
+    <!-- ===================================================================== -->
+    <section id="view-compare" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-8">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <div>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-gold-700 bg-amber-50 px-3 py-1 rounded-full border border-gold-500/30">
+              เปรียบเทียบทางเลือก • Plan Comparison
+            </span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-navy-900 mt-2">
+              ປຽບທຽບແຜນຜ່ອນຊຳລະ 3 ໄລຍະເວລາ
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">
+              ຄຳນວນຈາກມູນຄ່າຊັບສິນ <strong id="cmp-ref-price" class="text-navy-900 tabular-nums">350,000,000 ₭</strong>,
+              ເງິນດາວ <strong id="cmp-ref-down" class="text-navy-900 tabular-nums">20%</strong>,
+              ດອກເບ້ຍ <strong id="cmp-ref-rate" class="text-navy-900 tabular-nums">8.5%</strong>
+              (<span id="cmp-ref-method">ຫຼຸດຕົ້ນຫຼຸດດອກ</span>)
+            </p>
+          </div>
+          <button type="button" onclick="switchTab('calculator')"
+                  class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-navy-900 text-xs font-bold self-start md:self-auto transition">
+            ← ກັບໄປແກ້ໄຂຂໍ້ມູນຫຼັກ
+          </button>
+        </div>
+
+        <!-- 3 Side-by-Side Comparison Cards -->
+        <div id="compare-cards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          <!-- Populated dynamically for 3 Years (36m), 5 Years (60m), 10 Years (120m) -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 3: CLIENT QUOTATION FORM & A4 PRINT VIEW ("ໃບສະເໜີລາຄາ")          -->
+    <!-- ===================================================================== -->
+    <section id="view-quotation" class="hidden space-y-6">
+      <!-- Interactive Form Card (Hidden during Print) -->
+      <div id="quotation-form-card" class="bg-white rounded-3xl shadow-sm border border-slate-200/90 p-6 sm:p-8 no-print">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5 mb-6">
+          <div>
+            <h2 class="text-xl font-extrabold text-navy-900">ຂໍ້ມູນສຳລັບອອກໃບສະເໜີລາຄາ (Quotation)</h2>
+            <p class="text-xs text-slate-500 mt-0.5">ປ້ອນຂໍ້ມູນລູກຄ້າ ແລະ ໂຄງການ ເພື່ອພິມເປັນເອກະສານ A4 ຫຼື ບັນທຶກ PDF</p>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <button type="button" onclick="copyWhatsAppSummary()"
+                    class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-navy-900 text-xs font-bold flex items-center space-x-2 transition">
+              <svg class="w-4 h-4 text-gold-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+              <span>ຄັດລອກສົ່ງ WhatsApp</span>
+            </button>
+            <button type="button" onclick="window.print()"
+                    class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-gold-400 text-xs sm:text-sm font-extrabold shadow-md flex items-center space-x-2 transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+              </svg>
+              <span>ພິມໃບສະເໜີລາຄາ / Save PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label for="quote-customer-name" class="block text-xs font-bold text-slate-700 mb-1.5">
+              ຊື່ລູກຄ້າ (Customer Name)
+            </label>
+            <input type="text" id="quote-customer-name" placeholder="ຕົວຢ່າງ: ທ່ານ ສົມພອນ ວົງໄຊ"
+                   oninput="syncQuotationPreview()"
+                   class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-gold-600 focus:outline-none text-sm font-medium">
+          </div>
+
+          <div>
+            <label for="quote-project-name" class="block text-xs font-bold text-slate-700 mb-1.5">
+              ຊື່ໂຄງການ / ລະຫັດຕອນດິນ (Project / Plot ID)
+            </label>
+            <input type="text" id="quote-project-name" placeholder="ຕົວຢ່າງ: ໂຄງການ KIDC ວຽງຈັນ - ຕອນ A12"
+                   oninput="syncQuotationPreview()"
+                   class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-gold-600 focus:outline-none text-sm font-medium">
+          </div>
+
+          <div>
+            <label for="quote-agent-phone" class="block text-xs font-bold text-slate-700 mb-1.5">
+              ເບີໂທຕິດຕໍ່ພະນັກງານ (Sales Contact)
+            </label>
+            <input type="text" id="quote-agent-phone" value="020 9966 3414"
+                   oninput="syncQuotationPreview()"
+                   class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-gold-600 focus:outline-none text-sm font-bold tabular-nums">
+          </div>
+        </div>
+      </div>
+
+      <!-- Official A4 Quotation Document Preview & Print Sheet -->
+      <div class="print-only-sheet bg-white rounded-3xl shadow-md border border-slate-200 p-6 sm:p-10 max-w-4xl mx-auto">
+        <!-- Letterhead -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b-2 border-navy-900 pb-6">
+          <div class="flex items-center space-x-4">
+            <div class="w-14 h-14 rounded-2xl bg-navy-900 border-2 border-gold-600 flex flex-col items-center justify-center shrink-0">
+              <span class="text-gold-400 font-extrabold text-xl tracking-tight leading-none tabular-nums">KIDC</span>
+              <span class="text-[8px] text-gold-300 tracking-widest uppercase mt-0.5">ESTATE</span>
+            </div>
+            <div>
+              <h2 class="text-lg sm:text-xl font-extrabold text-navy-900">
+                ບໍລິສັດ ແກ້ວມົນຕີ ລົງທຶນ ພັດທະນາ ແລະ ກໍ່ສ້າງ ຈຳກັດຜູ້ດຽວ
+              </h2>
+              <p class="text-xs sm:text-sm font-bold text-gold-700 tracking-wide">
+                KIDC REAL ESTATE INVESTMENT DEVELOPMENT & CONSTRUCTION SOLE CO., LTD
+              </p>
+              <p class="text-xs text-slate-500 mt-0.5">
+                ນະຄອນຫຼວງວຽງຈັນ, ສປປ ລາວ • ໂທຕິດຕໍ່: <span id="doc-header-phone" class="font-bold text-navy-900 tabular-nums">020 9966 3414</span>
+              </p>
+            </div>
+          </div>
+          <div class="sm:text-right">
+            <span class="inline-block px-3 py-1 rounded-lg bg-navy-900 text-gold-400 text-xs font-extrabold uppercase tracking-wider">
+              ໃບສະເໜີລາຄາ & ແຜນຜ່ອນຊຳລະ
+            </span>
+            <p id="doc-date" class="text-xs text-slate-500 mt-2 tabular-nums">ວັນທີ: 12/11/2026</p>
+            <p id="doc-ref-no" class="text-[11px] text-slate-400 tabular-nums">ເລກທີອ້າງອີງ: KIDC-2026-001</p>
+          </div>
+        </div>
+
+        <!-- Client & Property Info Box -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs sm:text-sm">
+          <div>
+            <span class="text-slate-500 block text-xs">ຮຽນທ່ານ / ຊື່ລູກຄ້າ:</span>
+            <span id="doc-customer-name" class="font-bold text-navy-900 text-sm sm:text-base mt-0.5 block">ລູກຄ້າທົ່ວໄປ (Valued Client)</span>
+          </div>
+          <div>
+            <span class="text-slate-500 block text-xs">ໂຄງການ / ລະຫັດຕອນດິນ-ເຮືອນ:</span>
+            <span id="doc-project-name" class="font-bold text-navy-900 text-sm sm:text-base mt-0.5 block">ໂຄງການອະສັງຫາລິມະຊັບ KIDC Real Estate</span>
+          </div>
+        </div>
+
+        <!-- Financial Summary Grid -->
+        <div class="border border-slate-200 rounded-2xl overflow-hidden mb-6">
+          <div class="bg-navy-900 text-white px-5 py-3 text-xs font-bold uppercase tracking-wider flex justify-between">
+            <span>ລາຍລະອຽດການຄິດໄລ່ສິນເຊື່ອ / ການຜ່ອນຊຳລະ</span>
+            <span id="doc-currency-label">ສະກຸນເງິນ: LAK (₭)</span>
+          </div>
+          <div class="divide-y divide-slate-200 text-xs sm:text-sm">
+            <div class="flex justify-between px-5 py-3">
+              <span class="text-slate-600">ມູນຄ່າຊັບສິນ / ລາຄາຂາຍລວມ</span>
+              <span id="doc-price" class="font-bold text-navy-900 tabular-nums">350,000,000 ₭</span>
+            </div>
+            <div class="flex justify-between px-5 py-3 bg-slate-50/60">
+              <span class="text-slate-600">ເງິນຈ່າຍກ່ອນ / ເງິນດາວ (<span id="doc-down-pct" class="tabular-nums">20%</span>)</span>
+              <span id="doc-down-amt" class="font-bold text-navy-900 tabular-nums">70,000,000 ₭</span>
+            </div>
+            <div class="flex justify-between px-5 py-3">
+              <span class="text-slate-600">ຍອດຈັດສິນເຊື່ອ / ຍອດຄ້າງຜ່ອນຕົວຈິງ</span>
+              <span id="doc-principal" class="font-extrabold text-navy-900 tabular-nums">280,000,000 ₭</span>
+            </div>
+            <div class="flex justify-between px-5 py-3 bg-slate-50/60">
+              <span class="text-slate-600">ໄລຍະເວລາຜ່ອນຊຳລະ</span>
+              <span id="doc-term" class="font-bold text-navy-900 tabular-nums">10 ປີ (120 ງວດ)</span>
+            </div>
+            <div class="flex justify-between px-5 py-3">
+              <span class="text-slate-600">ອັດຕາດອກເບ້ຍ ແລະ ຮູບແບບ</span>
+              <span id="doc-rate-method" class="font-bold text-navy-900 tabular-nums">8.5% ຕໍ່ປີ (ຫຼຸດຕົ້ນຫຼຸດດອກ)</span>
+            </div>
+            <div class="flex justify-between px-5 py-4 bg-amber-50 border-t-2 border-gold-600">
+              <span class="font-extrabold text-navy-900 text-sm sm:text-base">ຍອດຜ່ອນຊຳລະຕໍ່ເດືອນ (Monthly Payment)</span>
+              <span id="doc-monthly" class="font-extrabold text-gold-700 text-base sm:text-lg tabular-nums">3,471,600 ₭ / ເດືອນ</span>
+            </div>
+            <div class="flex justify-between px-5 py-3">
+              <span class="text-slate-600">ດອກເບ້ຍລວມຕະຫຼອດສັນຍາ</span>
+              <span id="doc-interest" class="font-bold text-slate-800 tabular-nums">136,592,000 ₭</span>
+            </div>
+            <div class="flex justify-between px-5 py-3 bg-slate-50/60">
+              <span class="font-bold text-slate-800">ຍອດຊຳລະລວມທັງໝົດ (ເງິນຕົ້ນ + ດອກເບ້ຍ)</span>
+              <span id="doc-total" class="font-extrabold text-navy-900 tabular-nums">416,592,000 ₭</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yearly Summary Snapshot in Quotation -->
+        <div class="mb-8">
+          <h4 class="text-xs font-extrabold uppercase tracking-wider text-navy-900 mb-2.5">
+            ຕາຕະລາງສະຫຼຸບຍອດຜ່ອນຊຳລະລາຍປີ (Yearly Amortization Summary)
+          </h4>
+          <div class="overflow-x-auto border border-slate-200 rounded-xl">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="bg-slate-100 text-navy-900 font-bold border-b border-slate-200">
+                <tr>
+                  <th class="py-2 px-3">ປີທີ</th>
+                  <th class="py-2 px-3 text-right">ຍອດຜ່ອນລາຍປີ</th>
+                  <th class="py-2 px-3 text-right">ຕັດເງິນຕົ້ນ</th>
+                  <th class="py-2 px-3 text-right">ດອກເບ້ຍ</th>
+                  <th class="py-2 px-3 text-right">ຍອດຄົງເຫຼືອ</th>
+                </tr>
+              </thead>
+              <tbody id="doc-yearly-tbody" class="divide-y divide-slate-100 tabular-nums">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Notes & Signature Blocks -->
+        <div class="text-[11px] text-slate-500 mb-8 space-y-1">
+          <p class="font-bold text-slate-700">ໝາຍເຫດ:</p>
+          <p>1. ໃບສະເໜີລາຄາສະບັບນີ້ເປັນການຄິດໄລ່ປະມານການເບື້ອງຕົ້ນ ເງື່ອນໄຂຕົວຈິງອາດປ່ຽນແປງຕາມນະໂຍບາຍຂອງບໍລິສັດ ຫຼື ທະນາຄານຜູ້ໃຫ້ສິນເຊື່ອ.</p>
+          <p>2. ສອບຖາມຂໍ້ມູນເພີ່ມເຕີມ ແລະ ນັດໝາຍເຂົ້າຊົມໂຄງການຕົວຈິງໄດ້ທີ່ ບໍລິສັດ ແກ້ວມົນຕີ ລົງທຶນ ພັດທະນາ ແລະ ກໍ່ສ້າງ ຈຳກັດຜູ້ດຽວ (KIDC Real Estate).</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 pt-4 text-center text-xs">
+          <div>
+            <div class="h-14 border-b border-slate-400 w-4/5 mx-auto mb-2"></div>
+            <p class="font-bold text-navy-900">ລາຍເຊັນລູກຄ້າ (Customer Signature)</p>
+            <p class="text-slate-500 mt-1">ວັນທີ: ....... / ....... / ............</p>
+          </div>
+          <div>
+            <div class="h-14 border-b border-slate-400 w-4/5 mx-auto mb-2"></div>
+            <p class="font-bold text-navy-900">ທີ່ປຶກສາການຂາຍ KIDC Real Estate</p>
+            <p class="text-slate-500 mt-1">ໂທ: <span id="doc-sign-phone" class="tabular-nums">020 9966 3414</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-navy-900 text-slate-300 border-t border-gold-600/30 mt-12 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+      <div class="text-center sm:text-left">
+        <p class="font-extrabold text-white text-sm">
+          KIDC REAL ESTATE • <span class="text-gold-400">ບໍລິສັດ ແກ້ວມົນຕີ ລົງທຶນ ພັດທະນາ ແລະ ກໍ່ສ້າງ ຈຳກັດຜູ້ດຽວ</span>
+        </p>
+        <p class="text-slate-400 mt-1">ລະບົບຄິດໄລ່ຄ່າຜ່ອນຊຳລະອະສັງຫາລິມະຊັບ ຮອງຮັບສະກຸນເງິນ ກີບ (LAK), ບາດ (THB) ແລະ ໂດລາ (USD)</p>
+      </div>
+      <div class="text-center sm:text-right">
+        <span class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-gold-300 font-bold tabular-nums">
+          <span>ສາຍດ່ວນທີ່ປຶກສາ: 020 9966 3414</span>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================= -->
+  <!-- VANILLA JAVASCRIPT FINANCIAL ENGINE & UI CONTROLLER                     -->
+  <!-- ======================================================================= -->
+  <script>
+    // Currency Configuration Profiles
+    const CURRENCY_CONFIG = {
+      LAK: {
+        code: 'LAK',
+        label: 'LAK (ກີບ)',
+        symbol: '₭',
+        defaultPrice: 350000000,
+        minPrice: 50000000,
+        maxPrice: 5000000000,
+        stepPrice: 10000000,
+        presets: [
+          { label: '150,000,000 ₭', value: 150000000 },
+          { label: '350,000,000 ₭', value: 350000000 },
+          { label: '800,000,000 ₭', value: 800000000 },
+          { label: '1,500,000,000 ₭', value: 1500000000 }
+        ]
+      },
+      THB: {
+        code: 'THB',
+        label: 'THB (ບາດ)',
+        symbol: '฿',
+        defaultPrice: 1500000,
+        minPrice: 100000,
+        maxPrice: 20000000,
+        stepPrice: 50000,
+        presets: [
+          { label: '500,000 ฿', value: 500000 },
+          { label: '1,500,000 ฿', value: 1500000 },
+          { label: '3,000,000 ฿', value: 3000000 }
+        ]
+      },
+      USD: {
+        code: 'USD',
+        label: 'USD (ໂດລາ)',
+        symbol: '$',
+        defaultPrice: 45000,
+        minPrice: 5000,
+        maxPrice: 1000000,
+        stepPrice: 1000,
+        presets: [
+          { label: '$15,000', value: 15000 },
+          { label: '$45,000', value: 45000 },
+          { label: '$100,000', value: 100000 }
+        ]
+      }
+    };
+
+    // Centralized Application State
+    const appState = {
+      activeTab: 'calculator',
+      currency: 'LAK',
+      propertyPrice: 350000000,
+      downMode: 'percent', // 'percent' | 'amount'
+      downPercent: 20,
+      downAmount: 70000000,
+      annualRate: 8.5,
+      termUnit: 'years', // 'years' | 'months'
+      termValue: 10,     // 10 years (= 120 months)
+      method: 'reducing', // 'reducing' | 'flat'
+      scheduleView: 'yearly', // 'yearly' | 'monthly'
+      latestResult: null
+    };
+
+    let toastTimer = null;
+
+    // Initialize App on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('en-GB'); // DD/MM/YYYY
+      document.getElementById('doc-date').textContent = `ວັນທີ: ${dateStr}`;
+      document.getElementById('doc-ref-no').textContent = `ເລກທີອ້າງອີງ: KIDC-${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+
+      renderPricePresets();
+      syncAllInputsFromState();
+      recalculate();
+    });
+
+    // -------------------------------------------------------------------------
+    // NAVIGATION TABS
+    // -------------------------------------------------------------------------
+    function switchTab(tabName) {
+      appState.activeTab = tabName;
+      const tabs = ['calculator', 'compare', 'quotation'];
+
+      tabs.forEach(t => {
+        const viewEl = document.getElementById(`view-${t}`);
+        const btnEl = document.getElementById(`nav-tab-${t}`);
+        if (t === tabName) {
+          viewEl.classList.remove('hidden');
+          btnEl.className = 'flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all bg-white text-navy-900 shadow-sm whitespace-nowrap';
+        } else {
+          viewEl.classList.add('hidden');
+          btnEl.className = 'flex-1 sm:flex-none flex items-center justify-center space-x-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap';
+        }
+      });
+
+      if (tabName === 'compare') {
+        renderComparisonTab();
+      } else if (tabName === 'quotation') {
+        syncQuotationPreview();
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // CURRENCY SWITCHER
+    // -------------------------------------------------------------------------
+    function setCurrency(currCode) {
+      if (!CURRENCY_CONFIG[currCode]) return;
+      appState.currency = currCode;
+      const cfg = CURRENCY_CONFIG[currCode];
+
+      // Update header currency buttons
+      ['LAK', 'THB', 'USD'].forEach(code => {
+        const btn = document.getElementById(`curr-btn-${code}`);
+        if (code === currCode) {
+          btn.className = 'px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all bg-gradient-to-r from-gold-500 to-gold-600 text-navy-900 shadow';
+        } else {
+          btn.className = 'px-2.5 sm:px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all';
+        }
+      });
+
+      // Reset price to sensible currency default & update down payment amount proportionally
+      appState.propertyPrice = cfg.defaultPrice;
+      if (appState.downMode === 'percent') {
+        appState.downAmount = Math.round((appState.propertyPrice * appState.downPercent) / 100);
+      } else {
+        appState.downAmount = Math.round(appState.propertyPrice * 0.2);
+        appState.downPercent = 20;
+      }
+
+      renderPricePresets();
+      syncAllInputsFromState();
+      recalculate();
+    }
+
+    function renderPricePresets() {
+      const cfg = CURRENCY_CONFIG[appState.currency];
+      const container = document.getElementById('price-presets-container');
+      container.innerHTML = '';
+
+      cfg.presets.forEach(item => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-100 hover:bg-amber-50 hover:text-gold-700 border border-slate-200 hover:border-gold-500/40 text-slate-700 transition tabular-nums';
+        btn.textContent = item.label;
+        btn.onclick = () => {
+          appState.propertyPrice = item.value;
+          updateDownPaymentAfterPriceChange();
+          syncAllInputsFromState();
+          recalculate();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    // -------------------------------------------------------------------------
+    // INPUT HANDLERS & SYNCHRONIZATION
+    // -------------------------------------------------------------------------
+    function updateDownPaymentAfterPriceChange() {
+      if (appState.downMode === 'percent') {
+        appState.downAmount = Math.round((appState.propertyPrice * appState.downPercent) / 100);
+      } else {
+        if (appState.downAmount > appState.propertyPrice) {
+          appState.downAmount = appState.propertyPrice;
+        }
+        appState.downPercent = appState.propertyPrice > 0
+          ? Number(((appState.downAmount / appState.propertyPrice) * 100).toFixed(2))
+          : 0;
+      }
+    }
+
+    function onPriceTextInput(raw) {
+      const numeric = parseNumber(raw);
+      appState.propertyPrice = Math.max(0, numeric);
+      document.getElementById('slider-price').value = Math.min(appState.propertyPrice, CURRENCY_CONFIG[appState.currency].maxPrice);
+      updateDownPaymentAfterPriceChange();
+      updateDownPaymentInputsOnly();
+      recalculate();
+    }
+
+    function formatPriceField() {
+      document.getElementById('input-price').value = formatNumber(appState.propertyPrice);
+    }
+
+    function onPriceSliderInput(val) {
+      appState.propertyPrice = Number(val);
+      document.getElementById('input-price').value = formatNumber(appState.propertyPrice);
+      updateDownPaymentAfterPriceChange();
+      updateDownPaymentInputsOnly();
+      recalculate();
+    }
+
+    function setDownPaymentMode(mode) {
+      appState.downMode = mode;
+      const btnPct = document.getElementById('down-mode-percent');
+      const btnAmt = document.getElementById('down-mode-amount');
+      const wrapPct = document.getElementById('down-percent-wrapper');
+      const wrapAmt = document.getElementById('down-amount-wrapper');
+
+      if (mode === 'percent') {
+        btnPct.className = 'px-3 py-1.5 rounded-lg bg-navy-900 text-white shadow-sm transition';
+        btnAmt.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-navy-900 transition';
+        wrapPct.classList.remove('hidden');
+        wrapAmt.classList.add('hidden');
+      } else {
+        btnAmt.className = 'px-3 py-1.5 rounded-lg bg-navy-900 text-white shadow-sm transition';
+        btnPct.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-navy-900 transition';
+        wrapAmt.classList.remove('hidden');
+        wrapPct.classList.add('hidden');
+      }
+      updateDownPaymentInputsOnly();
+    }
+
+    function onDownPercentInput(val) {
+      let pct = parseFloat(val);
+      if (isNaN(pct) || pct < 0) pct = 0;
+      if (pct > 95) pct = 95;
+
+      appState.downPercent = pct;
+      appState.downAmount = Math.round((appState.propertyPrice * pct) / 100);
+
+      document.getElementById('input-down-percent').value = pct;
+      document.getElementById('input-down-amount').value = formatNumber(appState.downAmount);
+      document.getElementById('slider-down').value = Math.min(90, pct);
+      recalculate();
+    }
+
+    function onDownAmountInput(raw) {
+      let amt = Math.max(0, parseNumber(raw));
+      if (amt > appState.propertyPrice) amt = appState.propertyPrice;
+
+      appState.downAmount = amt;
+      appState.downPercent = appState.propertyPrice > 0
+        ? Number(((amt / appState.propertyPrice) * 100).toFixed(2))
+        : 0;
+
+      document.getElementById('input-down-percent').value = appState.downPercent;
+      document.getElementById('slider-down').value = Math.min(90, appState.downPercent);
+      recalculate();
+    }
+
+    function formatDownAmountField() {
+      document.getElementById('input-down-amount').value = formatNumber(appState.downAmount);
+    }
+
+    function updateDownPaymentInputsOnly() {
+      document.getElementById('input-down-percent').value = appState.downPercent;
+      document.getElementById('input-down-amount').value = formatNumber(appState.downAmount);
+      document.getElementById('slider-down').value = Math.min(90, appState.downPercent);
+    }
+
+    function onRateInput(val) {
+      let rate = parseFloat(val);
+      if (isNaN(rate) || rate < 0) rate = 0;
+      if (rate > 50) rate = 50;
+
+      appState.annualRate = rate;
+      document.getElementById('input-rate').value = rate;
+      document.getElementById('slider-rate').value = Math.min(20, rate);
+      document.getElementById('badge-rate-type').textContent =
+        rate === 0 ? '0% = ຜ່ອນບໍ່ມີດອກເບ້ຍ' : `ດອກເບ້ຍ ${rate}% ຕໍ່ປີ`;
+      recalculate();
+    }
+
+    function setTermUnit(unit) {
+      if (appState.termUnit === unit) return;
+      const currentMonths = getTotalMonths();
+
+      appState.termUnit = unit;
+      const btnYears = document.getElementById('term-unit-years');
+      const btnMonths = document.getElementById('term-unit-months');
+      const inputEl = document.getElementById('input-term');
+      const sliderEl = document.getElementById('slider-term');
+
+      if (unit === 'years') {
+        btnYears.className = 'px-3 py-1.5 rounded-lg bg-navy-900 text-white shadow-sm transition';
+        btnMonths.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-navy-900 transition';
+        const yrs = Math.max(1, Math.min(25, Math.round(currentMonths / 12)));
+        appState.termValue = yrs;
+        inputEl.min = 1;
+        inputEl.max = 25;
+        sliderEl.min = 1;
+        sliderEl.max = 25;
+        sliderEl.step = 1;
+      } else {
+        btnMonths.className = 'px-3 py-1.5 rounded-lg bg-navy-900 text-white shadow-sm transition';
+        btnYears.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-navy-900 transition';
+        const mos = Math.max(6, Math.min(300, currentMonths));
+        appState.termValue = mos;
+        inputEl.min = 6;
+        inputEl.max = 300;
+        sliderEl.min = 6;
+        sliderEl.max = 300;
+        sliderEl.step = 6;
+      }
+
+      syncTermUI();
+      recalculate();
+    }
+
+    function onTermInput(val) {
+      let num = parseInt(val, 10);
+      if (isNaN(num) || num < 1) num = 1;
+      if (appState.termUnit === 'years' && num > 25) num = 25;
+      if (appState.termUnit === 'months' && num > 300) num = 300;
+
+      appState.termValue = num;
+      syncTermUI();
+      recalculate();
+    }
+
+    function applyQuickTerm(value, unit) {
+      appState.termUnit = unit;
+      const btnYears = document.getElementById('term-unit-years');
+      const btnMonths = document.getElementById('term-unit-months');
+      const inputEl = document.getElementById('input-term');
+      const sliderEl = document.getElementById('slider-term');
+
+      if (unit === 'years') {
+        btnYears.className = 'px-3 py-1.5 rounded-lg bg-navy-900 text-white shadow-sm transition';
+        btnMonths.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-navy-900 transition';
+        inputEl.min = 1;
+        inputEl.max = 25;
+        sliderEl.min = 1;
+        sliderEl.max = 25;
+        sliderEl.step = 1;
+      } else {
+        btnMonths.className = 'px-3 py-1.5 rounded-lg bg-navy-900 text-white shadow-sm transition';
+        btnYears.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-navy-900 transition';
+        inputEl.min = 6;
+        inputEl.max = 300;
+        sliderEl.min = 6;
+        sliderEl.max = 300;
+        sliderEl.step = 6;
+      }
+
+      appState.termValue = value;
+      syncTermUI();
+      recalculate();
+    }
+
+    function syncTermUI() {
+      const totalMonths = getTotalMonths();
+      const yearsFloat = (totalMonths / 12);
+      const yearsLabel = Number.isInteger(yearsFloat) ? `${yearsFloat} ປີ` : `${yearsFloat.toFixed(1)} ປີ`;
+
+      document.getElementById('input-term').value = appState.termValue;
+      document.getElementById('slider-term').value = appState.termValue;
+      document.getElementById('term-equivalent-badge').textContent = `${yearsLabel} (${totalMonths} ງວດ)`;
+    }
+
+    function getTotalMonths() {
+      return appState.termUnit === 'years'
+        ? Math.max(1, appState.termValue * 12)
+        : Math.max(1, appState.termValue);
+    }
+
+    function setCalculationMethod(method) {
+      appState.method = method;
+      const btnRed = document.getElementById('method-btn-reducing');
+      const btnFlat = document.getElementById('method-btn-flat');
+
+      if (method === 'reducing') {
+        btnRed.className = 'p-3.5 rounded-2xl border-2 border-gold-600 bg-amber-50/70 text-left transition';
+        btnRed.querySelector('span:last-child').className = 'w-4 h-4 rounded-full bg-gold-600 flex items-center justify-center';
+        btnRed.querySelector('span:last-child').innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-white"></span>';
+
+        btnFlat.className = 'p-3.5 rounded-2xl border-2 border-slate-200 bg-white hover:border-slate-300 text-left transition';
+        btnFlat.querySelector('span:last-child').className = 'w-4 h-4 rounded-full border-2 border-slate-300';
+        btnFlat.querySelector('span:last-child').innerHTML = '';
+      } else {
+        btnFlat.className = 'p-3.5 rounded-2xl border-2 border-gold-600 bg-amber-50/70 text-left transition';
+        btnFlat.querySelector('span:last-child').className = 'w-4 h-4 rounded-full bg-gold-600 flex items-center justify-center';
+        btnFlat.querySelector('span:last-child').innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-white"></span>';
+
+        btnRed.className = 'p-3.5 rounded-2xl border-2 border-slate-200 bg-white hover:border-slate-300 text-left transition';
+        btnRed.querySelector('span:last-child').className = 'w-4 h-4 rounded-full border-2 border-slate-300';
+        btnRed.querySelector('span:last-child').innerHTML = '';
+      }
+
+      recalculate();
+    }
+
+    function syncAllInputsFromState() {
+      const cfg = CURRENCY_CONFIG[appState.currency];
+      document.getElementById('badge-currency-code').textContent = cfg.label;
+      document.getElementById('symbol-price-prefix').textContent = cfg.symbol;
+      document.getElementById('symbol-down-prefix').textContent = cfg.symbol;
+
+      const sliderPrice = document.getElementById('slider-price');
+      sliderPrice.min = cfg.minPrice;
+      sliderPrice.max = cfg.maxPrice;
+      sliderPrice.step = cfg.stepPrice;
+      sliderPrice.value = Math.min(cfg.maxPrice, Math.max(cfg.minPrice, appState.propertyPrice));
+
+      document.getElementById('input-price').value = formatNumber(appState.propertyPrice);
+      updateDownPaymentInputsOnly();
+      document.getElementById('input-rate').value = appState.annualRate;
+      document.getElementById('slider-rate').value = Math.min(20, appState.annualRate);
+      document.getElementById('badge-rate-type').textContent =
+        appState.annualRate === 0 ? '0% = ຜ່ອນບໍ່ມີດອກເບ້ຍ' : `ດອກເບ້ຍ ${appState.annualRate}% ຕໍ່ປີ`;
+      syncTermUI();
+    }
+
+    function resetCalculator() {
+      const cfg = CURRENCY_CONFIG[appState.currency];
+      appState.propertyPrice = cfg.defaultPrice;
+      appState.downPercent = 20;
+      appState.downAmount = Math.round(cfg.defaultPrice * 0.2);
+      appState.annualRate = 8.5;
+      appState.termUnit = 'years';
+      appState.termValue = 10;
+      appState.method = 'reducing';
+
+      setDownPaymentMode('percent');
+      setCalculationMethod('reducing');
+      applyQuickTerm(10, 'years');
+      syncAllInputsFromState();
+      recalculate();
+      showToast('ຣີເຊັດຄ່າເລີ່ມຕົ້ນສຳເລັດແລ້ວ');
+    }
+
+    // -------------------------------------------------------------------------
+    // CORE FINANCIAL FORMULA ENGINE (Handles 0% safely, Reducing & Flat)
+    // -------------------------------------------------------------------------
+    function computeLoanPlan({ price, downAmount, annualRate, totalMonths, method }) {
+      const principal = Math.max(0, price - downAmount);
+      const schedule = [];
+      let monthlyPayment = 0;
+      let totalInterest = 0;
+      let totalPayment = 0;
+
+      if (principal <= 0 || totalMonths <= 0) {
+        return {
+          principal: 0,
+          monthlyPayment: 0,
+          totalInterest: 0,
+          totalPayment: 0,
+          schedule: []
+        };
+      }
+
+      if (method === 'reducing') {
+        const monthlyRate = (annualRate / 100) / 12;
+        if (monthlyRate === 0) {
+          // Clean 0% handling without division by zero
+          monthlyPayment = principal / totalMonths;
+        } else {
+          const factor = Math.pow(1 + monthlyRate, totalMonths);
+          monthlyPayment = principal * ((monthlyRate * factor) / (factor - 1));
+        }
+
+        let balance = principal;
+        for (let m = 1; m <= totalMonths; m++) {
+          const interestPaid = monthlyRate === 0 ? 0 : balance * monthlyRate;
+          let principalPaid = monthlyPayment - interestPaid;
+
+          if (m === totalMonths || balance - principalPaid < 0.01) {
+            principalPaid = balance;
+            balance = 0;
+          } else {
+            balance -= principalPaid;
+          }
+
+          const actualPayment = principalPaid + interestPaid;
+          totalInterest += interestPaid;
+
+          schedule.push({
+            month: m,
+            year: Math.ceil(m / 12),
+            payment: actualPayment,
+            principal: principalPaid,
+            interest: interestPaid,
+            balance: Math.max(0, balance)
+          });
+        }
+        totalPayment = principal + totalInterest;
+      } else {
+        // Flat Rate Formula
+        const years = totalMonths / 12;
+        totalInterest = principal * (annualRate / 100) * years;
+        totalPayment = principal + totalInterest;
+        monthlyPayment = totalPayment / totalMonths;
+
+        const principalPerMonth = principal / totalMonths;
+        const interestPerMonth = totalInterest / totalMonths;
+        let balance = principal;
+
+        for (let m = 1; m <= totalMonths; m++) {
+          if (m === totalMonths || balance - principalPerMonth < 0.01) {
+            balance = 0;
+          } else {
+            balance -= principalPerMonth;
+          }
+
+          schedule.push({
+            month: m,
+            year: Math.ceil(m / 12),
+            payment: monthlyPayment,
+            principal: principalPerMonth,
+            interest: interestPerMonth,
+            balance: Math.max(0, balance)
+          });
+        }
+      }
+
+      return {
+        principal,
+        monthlyPayment,
+        totalInterest,
+        totalPayment,
+        schedule
+      };
+    }
+
+    // -------------------------------------------------------------------------
+    // RECALCULATE & UPDATE ALL VIEWS
+    // -------------------------------------------------------------------------
+    function recalculate() {
+      const cfg = CURRENCY_CONFIG[appState.currency];
+      const sym = cfg.symbol;
+      const totalMonths = getTotalMonths();
+
+      const result = computeLoanPlan({
+        price: appState.propertyPrice,
+        downAmount: appState.downAmount,
+        annualRate: appState.annualRate,
+        totalMonths,
+        method: appState.method
+      });
+
+      appState.latestResult = result;
+
+      // Update Down Payment & Loan Principal Readout Box
+      document.getElementById('readout-down-pct').textContent = `${appState.downPercent}%`;
+      document.getElementById('readout-down-amt').textContent = `${formatNumber(Math.round(appState.downAmount))} ${sym}`;
+      document.getElementById('readout-loan-principal').textContent = `${formatNumber(Math.round(result.principal))} ${sym}`;
+
+      // Update Hero Results Card
+      document.getElementById('hero-method-pill').textContent =
+        appState.method === 'reducing' ? 'ຫຼຸດຕົ້ນຫຼຸດດອກ' : 'ດອກເບ້ຍຄົງທີ່';
+      document.getElementById('hero-monthly-payment').textContent = formatNumber(Math.round(result.monthlyPayment));
+      document.getElementById('hero-monthly-unit').textContent = `${sym} / ເດືອນ`;
+
+      const yearsText = Number.isInteger(totalMonths / 12) ? `${totalMonths / 12} ປີ` : `${(totalMonths / 12).toFixed(1)} ປີ`;
+      document.getElementById('hero-subtitle-meta').textContent =
+        `ໄລຍະຜ່ອນ ${totalMonths} ງວດ (${yearsText}) • ດອກເບ້ຍ ${appState.annualRate}% ຕໍ່ປີ`;
+
+      document.getElementById('metric-principal').textContent = `${formatNumber(Math.round(result.principal))} ${sym}`;
+      document.getElementById('metric-interest').textContent = `${formatNumber(Math.round(result.totalInterest))} ${sym}`;
+      document.getElementById('metric-total').textContent = `${formatNumber(Math.round(result.totalPayment))} ${sym}`;
+
+      // Update Pure SVG Donut Chart
+      updateSVGDonutChart(result.principal, result.totalInterest, sym);
+
+      // Update Amortization Table
+      renderScheduleTable(result.schedule, sym);
+
+      // Keep Compare & Quotation synced if active
+      if (appState.activeTab === 'compare') renderComparisonTab();
+      if (appState.activeTab === 'quotation') syncQuotationPreview();
+    }
+
+    // -------------------------------------------------------------------------
+    // PURE SVG INTERACTIVE DONUT CHART
+    // -------------------------------------------------------------------------
+    function updateSVGDonutChart(principal, interest, sym) {
+      const total = principal + interest;
+      const circumference = 2 * Math.PI * 46; // r = 46 -> ~289.0265
+
+      const principalRatio = total > 0 ? principal / total : 1;
+      const interestRatio = total > 0 ? interest / total : 0;
+
+      const principalPct = (principalRatio * 100).toFixed(1);
+      const interestPct = (interestRatio * 100).toFixed(1);
+
+      const principalArc = principalRatio * circumference;
+      const ringPrincipal = document.getElementById('svg-ring-principal');
+      ringPrincipal.setAttribute('stroke-dasharray', `${principalArc.toFixed(2)} ${circumference.toFixed(2)}`);
+
+      document.getElementById('legend-principal-pct').textContent = `${principalPct}%`;
+      document.getElementById('legend-principal-amt').textContent = `${formatNumber(Math.round(principal))} ${sym}`;
+
+      document.getElementById('legend-interest-pct').textContent = `${interestPct}%`;
+      document.getElementById('legend-interest-amt').textContent = `${formatNumber(Math.round(interest))} ${sym}`;
+
+      // Update center text
+      document.getElementById('svg-center-title').textContent = 'ເງິນຕົ້ນ';
+      document.getElementById('svg-center-pct').textContent = `${principalPct}%`;
+    }
+
+    function highlightChartSegment(type) {
+      if (!appState.latestResult) return;
+      const { principal, totalInterest } = appState.latestResult;
+      const total = principal + totalInterest;
+      const sym = CURRENCY_CONFIG[appState.currency].symbol;
+
+      const ringP = document.getElementById('svg-ring-principal');
+      const ringI = document.getElementById('svg-ring-interest');
+      const label = document.getElementById('svg-chart-hover-label');
+
+      if (type === 'interest') {
+        const pct = total > 0 ? ((totalInterest / total) * 100).toFixed(1) : '0.0';
+        document.getElementById('svg-center-title').textContent = 'ດອກເບ້ຍ';
+        document.getElementById('svg-center-pct').textContent = `${pct}%`;
+        label.textContent = `ດອກເບ້ຍ: ${formatNumber(Math.round(totalInterest))} ${sym}`;
+        ringI.setAttribute('stroke-width', '19');
+        ringP.setAttribute('stroke-width', '15');
+      } else {
+        const pct = total > 0 ? ((principal / total) * 100).toFixed(1) : '100.0';
+        document.getElementById('svg-center-title').textContent = 'ເງິນຕົ້ນ';
+        document.getElementById('svg-center-pct').textContent = `${pct}%`;
+        label.textContent = `ເງິນຕົ້ນ: ${formatNumber(Math.round(principal))} ${sym}`;
+        ringP.setAttribute('stroke-width', '19');
+        ringI.setAttribute('stroke-width', '15');
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // AMORTIZATION SCHEDULE TABLE (Yearly & Monthly)
+    // -------------------------------------------------------------------------
+    function setScheduleView(view) {
+      appState.scheduleView = view;
+      const btnY = document.getElementById('sched-view-yearly');
+      const btnM = document.getElementById('sched-view-monthly');
+      const thPeriod = document.getElementById('th-period-label');
+
+      if (view === 'yearly') {
+        btnY.className = 'px-3.5 py-2 rounded-lg bg-navy-900 text-white shadow-sm transition';
+        btnM.className = 'px-3.5 py-2 rounded-lg text-slate-600 hover:text-navy-900 transition';
+        thPeriod.textContent = 'ປີທີ';
+      } else {
+        btnM.className = 'px-3.5 py-2 rounded-lg bg-navy-900 text-white shadow-sm transition';
+        btnY.className = 'px-3.5 py-2 rounded-lg text-slate-600 hover:text-navy-900 transition';
+        thPeriod.textContent = 'ງວດທີ';
+      }
+
+      if (appState.latestResult) {
+        renderScheduleTable(appState.latestResult.schedule, CURRENCY_CONFIG[appState.currency].symbol);
+      }
+    }
+
+    function aggregateYearlySchedule(schedule) {
+      const map = new Map();
+      schedule.forEach(item => {
+        if (!map.has(item.year)) {
+          map.set(item.year, {
+            year: item.year,
+            payment: 0,
+            principal: 0,
+            interest: 0,
+            balance: 0
+          });
+        }
+        const entry = map.get(item.year);
+        entry.payment += item.payment;
+        entry.principal += item.principal;
+        entry.interest += item.interest;
+        entry.balance = item.balance;
+      });
+      return Array.from(map.values());
+    }
+
+    function renderScheduleTable(schedule, sym) {
+      const tbody = document.getElementById('schedule-tbody');
+      const footerCount = document.getElementById('schedule-footer-count');
+      tbody.innerHTML = '';
+
+      if (!schedule || schedule.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-slate-400">ບໍ່ມີຍອດຄ້າງຜ່ອນ (ເງິນດາວຄົບ 100%)</td></tr>`;
+        footerCount.textContent = '0 ລາຍການ';
+        return;
+      }
+
+      if (appState.scheduleView === 'yearly') {
+        const yearlyRows = aggregateYearlySchedule(schedule);
+        footerCount.textContent = `ສະແດງສະຫຼຸບ ${yearlyRows.length} ປີ (ທັງໝົດ ${schedule.length} ງວດ)`;
+
+        yearlyRows.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-amber-50/40 transition';
+          tr.innerHTML = `
+            <td class="py-3 px-4 font-bold text-navy-900 whitespace-nowrap">ປີທີ ${row.year}</td>
+            <td class="py-3 px-4 text-right font-semibold text-slate-800 whitespace-nowrap">${formatNumber(Math.round(row.payment))} ${sym}</td>
+            <td class="py-3 px-4 text-right font-bold text-navy-900 whitespace-nowrap">${formatNumber(Math.round(row.principal))} ${sym}</td>
+            <td class="py-3 px-4 text-right font-semibold text-gold-700 whitespace-nowrap">${formatNumber(Math.round(row.interest))} ${sym}</td>
+            <td class="py-3 px-4 text-right font-extrabold text-slate-900 whitespace-nowrap">${formatNumber(Math.round(row.balance))} ${sym}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } else {
+        footerCount.textContent = `ສະແດງລາຍລະອຽດທັງໝົດ ${schedule.length} ງວດ`;
+
+        schedule.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-amber-50/40 transition';
+          tr.innerHTML = `
+            <td class="py-2.5 px-4 font-bold text-navy-900 whitespace-nowrap">ງວດທີ ${row.month} <span class="text-[11px] font-normal text-slate-400">(ປີ ${row.year})</span></td>
+            <td class="py-2.5 px-4 text-right font-semibold text-slate-800 whitespace-nowrap">${formatNumber(Math.round(row.payment))} ${sym}</td>
+            <td class="py-2.5 px-4 text-right font-bold text-navy-900 whitespace-nowrap">${formatNumber(Math.round(row.principal))} ${sym}</td>
+            <td class="py-2.5 px-4 text-right font-semibold text-gold-700 whitespace-nowrap">${formatNumber(Math.round(row.interest))} ${sym}</td>
+            <td class="py-2.5 px-4 text-right font-extrabold text-slate-900 whitespace-nowrap">${formatNumber(Math.round(row.balance))} ${sym}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // COMPARE 3 PLANS TAB ("ປຽບທຽບແຜນຜ່ອນ")
+    // -------------------------------------------------------------------------
+    function renderComparisonTab() {
+      const sym = CURRENCY_CONFIG[appState.currency].symbol;
+      document.getElementById('cmp-ref-price').textContent = `${formatNumber(appState.propertyPrice)} ${sym}`;
+      document.getElementById('cmp-ref-down').textContent = `${appState.downPercent}% (${formatNumber(Math.round(appState.downAmount))} ${sym})`;
+      document.getElementById('cmp-ref-rate').textContent = `${appState.annualRate}% ຕໍ່ປີ`;
+      document.getElementById('cmp-ref-method').textContent =
+        appState.method === 'reducing' ? 'ຫຼຸດຕົ້ນຫຼຸດດອກ' : 'ດອກເບ້ຍຄົງທີ່';
+
+      const plans = [
+        { years: 3, months: 36, tag: 'ໄລຍະສັ້ນ • ປະຢັດດອກເບ້ຍ', highlight: false },
+        { years: 5, months: 60, tag: 'ແຜນຍອດນິຍົມ • ສົມດຸນ', highlight: true },
+        { years: 10, months: 120, tag: 'ຜ່ອນສະບາຍ • ຄ່າງວດຕ່ຳ', highlight: false }
+      ];
+
+      const grid = document.getElementById('compare-cards-grid');
+      grid.innerHTML = '';
+
+      plans.forEach(plan => {
+        const res = computeLoanPlan({
+          price: appState.propertyPrice,
+          downAmount: appState.downAmount,
+          annualRate: appState.annualRate,
+          totalMonths: plan.months,
+          method: appState.method
+        });
+
+        const total = res.principal + res.totalInterest;
+        const pPct = total > 0 ? Math.round((res.principal / total) * 100) : 100;
+        const iPct = 100 - pPct;
+
+        const card = document.createElement('div');
+        card.className = plan.highlight
+          ? 'rounded-3xl border-2 border-gold-600 bg-gradient-to-b from-navy-900 to-navy-950 text-white p-6 shadow-xl flex flex-col justify-between relative'
+          : 'rounded-3xl border border-slate-200 bg-slate-50/70 text-navy-900 p-6 shadow-sm flex flex-col justify-between';
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-extrabold px-3 py-1 rounded-full ${plan.highlight ? 'bg-gold-500 text-navy-900' : 'bg-navy-900 text-gold-400'}">
+                ${plan.tag}
+              </span>
+            </div>
+
+            <h3 class="text-2xl font-extrabold ${plan.highlight ? 'text-white' : 'text-navy-900'}">
+              ${plan.years} ປີ <span class="text-sm font-semibold ${plan.highlight ? 'text-slate-300' : 'text-slate-500'}">(${plan.months} ເດືອນ)</span>
+            </h3>
+
+            <div class="my-5 p-4 rounded-2xl ${plan.highlight ? 'bg-white/10 border border-gold-400/30' : 'bg-white border border-slate-200'}">
+              <span class="text-xs block ${plan.highlight ? 'text-gold-300' : 'text-slate-500'}">ຍອດຜ່ອນຊຳລະຕໍ່ເດືອນ</span>
+              <div class="text-2xl sm:text-3xl font-extrabold mt-1 tabular-nums ${plan.highlight ? 'text-gold-400' : 'text-navy-900'}">
+                ${formatNumber(Math.round(res.monthlyPayment))} <span class="text-sm font-bold">${sym}</span>
+              </div>
+            </div>
+
+            <div class="space-y-2.5 text-xs sm:text-sm">
+              <div class="flex justify-between">
+                <span class="${plan.highlight ? 'text-slate-300' : 'text-slate-500'}">ຍອດຈັດສິນເຊື່ອ:</span>
+                <span class="font-bold tabular-nums">${formatNumber(Math.round(res.principal))} ${sym}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="${plan.highlight ? 'text-slate-300' : 'text-slate-500'}">ດອກເບ້ຍລວມ:</span>
+                <span class="font-bold tabular-nums ${plan.highlight ? 'text-gold-300' : 'text-gold-700'}">${formatNumber(Math.round(res.totalInterest))} ${sym}</span>
+              </div>
+              <div class="flex justify-between pt-2 border-t ${plan.highlight ? 'border-white/15' : 'border-slate-200'}">
+                <span class="font-bold">ຍອດຊຳລະລວມ:</span>
+                <span class="font-extrabold tabular-nums">${formatNumber(Math.round(res.totalPayment))} ${sym}</span>
+              </div>
+            </div>
+
+            <!-- Ratio Bar -->
+            <div class="mt-5">
+              <div class="flex justify-between text-[11px] mb-1 ${plan.highlight ? 'text-slate-300' : 'text-slate-500'}">
+                <span>ເງິນຕົ້ນ ${pPct}%</span>
+                <span>ດອກເບ້ຍ ${iPct}%</span>
+              </div>
+              <div class="w-full h-2.5 rounded-full overflow-hidden flex ${plan.highlight ? 'bg-white/15' : 'bg-slate-200'}">
+                <div style="width:${pPct}%" class="${plan.highlight ? 'bg-white' : 'bg-navy-900'}"></div>
+                <div style="width:${iPct}%" class="bg-gold-500"></div>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" onclick="selectComparedPlan(${plan.years})"
+                  class="mt-6 w-full py-3 px-4 rounded-xl font-extrabold text-xs sm:text-sm transition ${
+                    plan.highlight
+                      ? 'bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-navy-900 shadow-lg'
+                      : 'bg-navy-900 hover:bg-navy-800 text-white'
+                  }">
+            ເລືອກໃຊ້ແຜນ ${plan.years} ປີ ນີ້
+          </button>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function selectComparedPlan(years) {
+      applyQuickTerm(years, 'years');
+      switchTab('calculator');
+      showToast(`ເລືອກແຜນຜ່ອນ ${years} ປີ (${years * 12} ງວດ) ແລ້ວ`);
+    }
+
+    // -------------------------------------------------------------------------
+    // QUOTATION FORM & A4 DOCUMENT SYNC ("ໃບສະເໜີລາຄາ")
+    // -------------------------------------------------------------------------
+    function syncQuotationPreview() {
+      if (!appState.latestResult) return;
+      const sym = CURRENCY_CONFIG[appState.currency].symbol;
+      const res = appState.latestResult;
+      const totalMonths = getTotalMonths();
+      const yearsLabel = Number.isInteger(totalMonths / 12) ? `${totalMonths / 12} ປີ` : `${(totalMonths / 12).toFixed(1)} ປີ`;
+
+      const customerName = document.getElementById('quote-customer-name').value.trim() || 'ລູກຄ້າທົ່ວໄປ (Valued Client)';
+      const projectName = document.getElementById('quote-project-name').value.trim() || 'ໂຄງການອະສັງຫາລິມະຊັບ KIDC Real Estate';
+      const agentPhone = document.getElementById('quote-agent-phone').value.trim() || '020 9966 3414';
+
+      document.getElementById('doc-customer-name').textContent = customerName;
+      document.getElementById('doc-project-name').textContent = projectName;
+      document.getElementById('doc-header-phone').textContent = agentPhone;
+      document.getElementById('doc-sign-phone').textContent = agentPhone;
+
+      document.getElementById('doc-currency-label').textContent = `ສະກຸນເງິນ: ${CURRENCY_CONFIG[appState.currency].label}`;
+      document.getElementById('doc-price').textContent = `${formatNumber(Math.round(appState.propertyPrice))} ${sym}`;
+      document.getElementById('doc-down-pct').textContent = `${appState.downPercent}%`;
+      document.getElementById('doc-down-amt').textContent = `${formatNumber(Math.round(appState.downAmount))} ${sym}`;
+      document.getElementById('doc-principal').textContent = `${formatNumber(Math.round(res.principal))} ${sym}`;
+      document.getElementById('doc-term').textContent = `${yearsLabel} (${totalMonths} ງວດ)`;
+      document.getElementById('doc-rate-method').textContent =
+        `${appState.annualRate}% ຕໍ່ປີ (${appState.method === 'reducing' ? 'ຫຼຸດຕົ້ນຫຼຸດດອກ' : 'ດອກເບ້ຍຄົງທີ່'})`;
+      document.getElementById('doc-monthly').textContent = `${formatNumber(Math.round(res.monthlyPayment))} ${sym} / ເດືອນ`;
+      document.getElementById('doc-interest').textContent = `${formatNumber(Math.round(res.totalInterest))} ${sym}`;
+      document.getElementById('doc-total').textContent = `${formatNumber(Math.round(res.totalPayment))} ${sym}`;
+
+      // Render Yearly Summary inside A4 Document
+      const docTbody = document.getElementById('doc-yearly-tbody');
+      docTbody.innerHTML = '';
+      const yearlyRows = aggregateYearlySchedule(res.schedule);
+
+      if (yearlyRows.length === 0) {
+        docTbody.innerHTML = `<tr><td colspan="5" class="py-3 px-3 text-center text-slate-400">ຊຳລະຄົບ 100% ແລ້ວ</td></tr>`;
+      } else {
+        yearlyRows.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td class="py-2 px-3 font-bold text-navy-900">ປີທີ ${r.year}</td>
+            <td class="py-2 px-3 text-right">${formatNumber(Math.round(r.payment))} ${sym}</td>
+            <td class="py-2 px-3 text-right font-semibold">${formatNumber(Math.round(r.principal))} ${sym}</td>
+            <td class="py-2 px-3 text-right text-gold-700">${formatNumber(Math.round(r.interest))} ${sym}</td>
+            <td class="py-2 px-3 text-right font-bold">${formatNumber(Math.round(r.balance))} ${sym}</td>
+          `;
+          docTbody.appendChild(tr);
+        });
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // EXPORT TOOLS: WHATSAPP CLIPBOARD & EXCEL CSV
+    // -------------------------------------------------------------------------
+    function copyWhatsAppSummary() {
+      if (!appState.latestResult) return;
+      const sym = CURRENCY_CONFIG[appState.currency].symbol;
+      const res = appState.latestResult;
+      const totalMonths = getTotalMonths();
+      const yearsLabel = Number.isInteger(totalMonths / 12) ? `${totalMonths / 12} ປີ` : `${(totalMonths / 12).toFixed(1)} ປີ`;
+
+      const customerName = document.getElementById('quote-customer-name')?.value.trim();
+      const projectName = document.getElementById('quote-project-name')?.value.trim();
+      const agentPhone = document.getElementById('quote-agent-phone')?.value.trim() || '020 9966 3414';
+
+      let message = `🏢 *KIDC REAL ESTATE*\n`;
+      message += `ບໍລິສັດ ແກ້ວມົນຕີ ລົງທຶນ ພັດທະນາ ແລະ ກໍ່ສ້າງ ຈຳກັດຜູ້ດຽວ\n`;
+      message += `━━━━━━━━━━━━━━━━━━━━\n`;
+      if (customerName) message += `👤 ລູກຄ້າ: ${customerName}\n`;
+      if (projectName) message += `🏡 ໂຄງການ/ຕອນດິນ: ${projectName}\n`;
+      message += `💰 ມູນຄ່າຊັບສິນ: *${formatNumber(Math.round(appState.propertyPrice))} ${sym}*\n`;
+      message += `💵 ເງິນຈ່າຍກ່ອນ (${appState.downPercent}%): *${formatNumber(Math.round(appState.downAmount))} ${sym}*\n`;
+      message += `🏦 ຍອດຄ້າງຜ່ອນ: *${formatNumber(Math.round(res.principal))} ${sym}*\n`;
+      message += `📅 ໄລຍະເວລາຜ່ອນ: *${yearsLabel} (${totalMonths} ງວດ)*\n`;
+      message += `📈 ອັດຕາດອກເບ້ຍ: *${appState.annualRate}% ຕໍ່ປີ* (${appState.method === 'reducing' ? 'ຫຼຸດຕົ້ນຫຼຸດດອກ' : 'ຄົງທີ່'})\n`;
+      message += `━━━━━━━━━━━━━━━━━━━━\n`;
+      message += `✅ *ຍອດຜ່ອນຕໍ່ເດືອນ: ${formatNumber(Math.round(res.monthlyPayment))} ${sym}/ເດືອນ*\n`;
+      message += `• ດອກເບ້ຍລວມ: ${formatNumber(Math.round(res.totalInterest))} ${sym}\n`;
+      message += `• ຍອດຊຳລະລວມ: ${formatNumber(Math.round(res.totalPayment))} ${sym}\n`;
+      message += `━━━━━━━━━━━━━━━━━━━━\n`;
+      message += `📞 ສອບຖາມຂໍ້ມູນເພີ່ມເຕີມ: ${agentPhone}`;
+
+      // Reliable iFrame-safe copy using hidden textarea + execCommand('copy')
+      const textarea = document.createElement('textarea');
+      textarea.value = message;
+      textarea.style.position = 'fixed';
+      textarea.style.top = '0';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+
+      try {
+        document.execCommand('copy');
+        showToast('ຄັດລອກຂໍ້ມູນສຳເລັດແລ້ວ!');
+      } catch (err) {
+        showToast('ບໍ່ສາມາດຄັດລອກໄດ້ ກະລຸນາລອງໃໝ່');
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function exportScheduleCSV() {
+      if (!appState.latestResult || !appState.latestResult.schedule.length) {
+        showToast('ບໍ່ມີຂໍ້ມູນຕາຕະລາງສຳລັບດາວໂຫຼດ');
+        return;
+      }
+
+      const curr = appState.currency;
+      const schedule = appState.latestResult.schedule;
+
+      // UTF-8 BOM (\uFEFF) ensures Lao text displays cleanly in Microsoft Excel
+      let csv = '\uFEFF';
+      csv += `KIDC REAL ESTATE - ຕາຕະລາງການຜ່ອນຊຳລະ (${curr})\n`;
+      csv += `ມູນຄ່າຊັບສິນ,${Math.round(appState.propertyPrice)},ເງິນດາວ (${appState.downPercent}%),${Math.round(appState.downAmount)},ຍອດຄ້າງຜ່ອນ,${Math.round(appState.latestResult.principal)}\n\n`;
+      csv += `ງວດທີ,ປີທີ,ຍອດຜ່ອນຕໍ່ງວດ (${curr}),ຕັດເງິນຕົ້ນ (${curr}),ດອກເບ້ຍ (${curr}),ຍອດຄົງເຫຼືອ (${curr})\n`;
+
+      schedule.forEach(row => {
+        csv += `${row.month},${row.year},${Math.round(row.payment)},${Math.round(row.principal)},${Math.round(row.interest)},${Math.round(row.balance)}\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `KIDC_RealEstate_Schedule_${curr}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      showToast('ດາວໂຫຼດຟາຍ Excel (CSV) ສຳເລັດແລ້ວ!');
+    }
+
+    // -------------------------------------------------------------------------
+    // UTILITIES
+    // -------------------------------------------------------------------------
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastText').textContent = text;
+
+      toast.classList.remove('-translate-y-28', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('-translate-y-28', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3000);
+    }
+
+    function formatNumber(num) {
+      if (isNaN(num) || num === null) return '0';
+      return Math.round(num).toLocaleString('en-US');
+    }
+
+    function parseNumber(str) {
+      if (typeof str === 'number') return str;
+      const cleaned = String(str).replace(/[^0-9.]/g, '');
+      const parsed = parseFloat(cleaned);
+      return isNaN(parsed) ? 0 : parsed;
+    }
+  </script>
+</body>
+</html>

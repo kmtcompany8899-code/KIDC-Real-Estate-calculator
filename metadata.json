@@ -1,0 +1,6 @@
+{
+  "name": "KIDC Real Estate Calculator",
+  "description": "ລະບົບຄິດໄລ່ຄ່າຜ່ອນຊຳລະອະສັງຫາລິມະຊັບ KIDC Real Estate ພ້ອມບັນທຶກຂໍ້ມູນໃນ Firebase ແລະ ເຂົ້າສູ່ລະບົບດ້ວຍ Gmail",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
